@@ -86,10 +86,14 @@ buttonArr.forEach((button, idx) => {
 });
 function sendTime(str, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		addJitter(type);
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (!str || lastPressed != 'input') {
-		return alert(
+		addJitter(type);
+		return showAlert(
 			'no date/time variables yet declared or you are trying to call a variable outside of a SendInput call.'
 		);
 	}
@@ -111,11 +115,13 @@ function sendTime(str, type) {
 }
 function sendString(str, type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
 	}
 	if (type.getAttribute('data-type') == 'return' && returnStatement == true) {
+		addJitter(type);
 		return showAlert('only one return statement allowed');
 	}
 	returnStatement = type.getAttribute('data-type') === 'return' ? true : false;
@@ -125,14 +131,17 @@ function sendString(str, type) {
 
 function appendKeys(expr, type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
 	}
 	if (inputEl.value == '') {
+		addJitter(type);
 		return showAlert('the input field is empty');
 	}
 	if (scriptEl.value != '') {
+		addJitter(type);
 		return showAlert('do not put that there, it goes at the beginning, please');
 	}
 	scriptEl.value += `${startingLine(scriptEl.value)}:R*?:${inputEl.value}::`;
@@ -143,11 +152,13 @@ function appendKeys(expr, type) {
 
 function sendInput(expr, type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
 	}
 	if (inputEl.value == '') {
+		addJitter(type);
 		return showAlert('the input field is empty');
 	}
 
@@ -161,6 +172,7 @@ function sendInput(expr, type) {
 
 function send(str, type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
@@ -183,12 +195,14 @@ function send(str, type) {
 
 function showInputBox(expr, type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
 	}
 	const [variable, prompt] = parseInput(inputEl.value);
 	if (!variable || !prompt) {
+		addJitter(type);
 		return showAlert(
 			'the input is not formatted correctly.  you must specify the name of a variable followed by a comma and then the prompt you wish to display in the input box'
 		);
@@ -213,6 +227,7 @@ function startingLine(input) {
 
 function formatFullDate(type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
@@ -231,6 +246,7 @@ function formatFullDate(type) {
 
 function formatFullMonth(type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
@@ -248,6 +264,7 @@ function formatFullMonth(type) {
 
 function formatCurrentTime(type) {
 	if (returnStatement === true) {
+		addJitter(type);
 		return showAlert(
 			'You have already returned, you cannot add any more stuff'
 		);
@@ -295,4 +312,11 @@ function showAlert(str) {
 	setTimeout(() => {
 		toastEl.classList.remove('animation', 'show');
 	}, 3000);
+}
+
+function addJitter(element) {
+	element.classList.add('jitter');
+	setTimeout(() => {
+		element.classList.remove('jitter');
+	}, 1000);
 }
