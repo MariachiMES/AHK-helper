@@ -1,0 +1,35 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.button {
+	color: white;
+	background-color: rgb(93, 93, 238);
+	border: none;
+	padding: 1rem;
+	margin: 1rem;
+	border-radius: 25px;
+}
+.input-bar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.input-bar > input {
+	border: 1px solid black;
+	height: 2rem;
+}
+label {
+	margin: 1rem;
+}
+input {
+	width: 500px;
+}
+input::placeholder {
+	padding: 1rem;
+}

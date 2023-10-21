@@ -10,122 +10,173 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
+		<link
+			rel="stylesheet"
+			href="style.css"
+		/>
 		<title>AHK Generator</title>
 	</head>
 	<body>
-		<input
-			id="script-input"
-			type="text"
-		/>
-		<button
-			type="button"
-			id="start-input-script"
-		>
-			Hot Key
-		</button>
-		<button
-			type="button"
-			id="send-input"
-		>
-			Send Input
-		</button>
-		<button
-			type="button"
-			id="variable"
-		>
-			Name Variable
-		</button>
-		<button
-			type=" button"
-			id="input-box"
-		>
-			Input Box
-		</button>
+		<div class="input-bar">
+			<label for="script-input">AHK Input: </label>
+			<input
+				id="script-input"
+				type="text"
+				data-type="input"
+				placeholder="type input here"
+			/>
+		</div>
+		<div class="buttons">
+			<button
+				type="button"
+				id="start-input-script"
+				data-type="input"
+			>
+				Hot Key
+			</button>
+			<button
+				type="button"
+				id="send-input"
+				data-type="input"
+			>
+				Send Input
+			</button>
 
-		<button
-			type="button"
-			id="tab"
-		>
-			Tab
-		</button>
-		<button
-			type="button"
-			id="enter"
-		>
-			Enter
-		</button>
-		<button
-			type="button"
-			id="full-date"
-		>
-			MM/dd/yyyy
-		</button>
-		<button
-			type="button"
-			id="month-name"
-		>
-			Send Month MM
-		</button>
-		<button
-			type="button"
-			id="current-time"
-		>
-			Send Current Time hh:mm tt
-		</button>
-		<button
-			type="button"
-			id="arrow-up"
-		>
-			Arrow Up
-		</button>
-		<button
-			type="button"
-			id="arrow-left"
-		>
-			Arrow Left
-		</button>
-		<button
-			type="button"
-			id="arrow-right"
-		>
-			Arrow Right
-		</button>
-		<button
-			type="button"
-			id="arrow-down"
-		>
-			Arrow Down
-		</button>
-		<button
-			type="button"
-			id="exclamation"
-		>
-			!
-		</button>
-		<button
-			type="button"
-			id="sleep"
-		>
-			Sleep 300
-		</button>
-		<button
-			type="button"
-			id="return"
-		>
-			Return
-		</button>
-		<button
-			type="button"
-			id="new-line"
-		>
-			New Line
-		</button>
+			<button
+				type="button"
+				id="tab"
+				data-type="key"
+			>
+				Tab
+			</button>
+			<button
+				type="button"
+				id="enter"
+				data-type="key"
+			>
+				Enter
+			</button>
+			<button
+				type="button"
+				id="full-date"
+				data-type="time"
+			>
+				Format Date MM/dd/yyyy
+			</button>
+			<button
+				type="button"
+				id="month-name"
+				data-type="time"
+			>
+				Format Month MM
+			</button>
+			<button
+				type="button"
+				id="current-time"
+				data-type="time"
+			>
+				Format Current Time hh:mm tt
+			</button>
+			<button
+				type="button"
+				id="send-full-date"
+				data-type="key"
+			>
+				Send Full Date
+			</button>
+			<button
+				type="button"
+				id="send-month"
+				data-type="key"
+			>
+				Send Month
+			</button>
+			<button
+				type="button"
+				id="send-time"
+				data-type="key"
+			>
+				Send Time
+			</button>
+			<button
+				type="button"
+				id="arrow-up"
+				data-type="key"
+			>
+				Arrow Up
+			</button>
+			<button
+				type="button"
+				id="arrow-left"
+				data-type="key"
+			>
+				Arrow Left
+			</button>
+			<button
+				type="button"
+				id="arrow-right"
+				data-type="key"
+			>
+				Arrow Right
+			</button>
+			<button
+				type="button"
+				id="arrow-down"
+				data-type="key"
+			>
+				Arrow Down
+			</button>
+			<button
+				type="button"
+				id="exclamation"
+				data-type="key"
+			>
+				!
+			</button>
+			<button
+				type="button"
+				id="sleep"
+			>
+				Sleep 300
+			</button>
+			<button
+				type="button"
+				id="return"
+				data-type="return"
+			>
+				Return
+			</button>
+			<button
+				type="button"
+				id="space"
+				data-type="key"
+			>
+				Space
+			</button>
+			<button
+				type="button"
+				id="new-line"
+				data-type="key"
+			>
+				New Line
+			</button>
+			<button
+				type="button"
+				id="clear"
+				data-type="clear"
+			>
+				Clear All
+			</button>
+		</div>
+
 		<br />
-		<textarea
-			id="script-area"
-			rows="6"
-			cols="100"
-		></textarea>
+		<div class="text-area">
+			<textarea
+				id="script-area"
+				rows="30"
+				cols="50"
+			></textarea>
+		</div>
 	</body>
 	<script src="./index.js"></script>
 </html>
