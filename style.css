@@ -10,7 +10,7 @@
 	background-color: rgb(93, 93, 238);
 	border: none;
 	padding: 1rem;
-	margin: 1rem;
+	margin: 0.5rem;
 	border-radius: 25px;
 }
 .input-bar {
@@ -29,7 +29,56 @@ label {
 }
 input {
 	width: 500px;
+	border-radius: 5px;
 }
 input::placeholder {
 	padding: 1rem;
+}
+
+.text-area {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+textarea {
+	border-radius: 5px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-left: 15vw;
+	margin-right: 15vw;
+}
+@keyframes fadeout {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+.toast {
+	position: absolute;
+	background-color: rgb(255, 0, 0);
+	padding: 0.5rem;
+	border-radius: 2rem;
+	color: white;
+	align-items: center;
+	justify-content: center;
+	font-size: 60px;
+	top: 30%;
+	width: 80vw;
+	display: none;
+}
+.animation {
+	animation-name: fadeout;
+	animation-duration: 3s;
+}
+
+.show {
+	display: flex;
 }

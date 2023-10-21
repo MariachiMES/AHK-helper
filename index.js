@@ -1,6 +1,7 @@
 const buttonArr = document.querySelectorAll('button');
 const scriptEl = document.getElementById('script-area');
 const inputEl = document.getElementById('script-input');
+const toastEl = document.getElementById('toast');
 let lastPressed = null;
 let currentDateTime = false;
 let todaysMonth = false;
@@ -8,7 +9,7 @@ let returnStatement = false;
 let fullDateVar;
 let fullMonthVar;
 let currentTimeVar;
-buttonArr.forEach((button) => {});
+
 buttonArr.forEach((button, idx) => {
 	button.classList.add('button');
 	button.addEventListener('click', (e) => {
@@ -63,7 +64,7 @@ buttonArr.forEach((button, idx) => {
 				sendTime(fullMonthVar, keyType);
 				break;
 			case 'send-time':
-				sendTime(currentDateTime, keyType);
+				sendTime(currentTimeVar, keyType);
 				break;
 			case 'sleep':
 				sendString(`${startingLine(scriptEl.value)}Sleep, 300`, keyType);
@@ -89,20 +90,20 @@ function sendTime(str, type) {
 	}
 	if (!str || lastPressed != 'input') {
 		return alert(
-			'no date/time variables yet declared or you are putting this in the wrong place'
+			'no date/time variables yet declared or you are trying to call a variable outside of a SendInput call.'
 		);
 	}
 
-	let prefix = `${startingLine(scriptEl.value)}send, `;
+	let prefix = `${startingLine(scriptEl.value)}SendInput, `;
 	if (lastPressed === 'input') {
 		console.log(type);
-		scriptEl.value += `%${str}% `;
+		scriptEl.value += ` %${str}% `;
 		inputEl.value = '';
 
 		return;
 	} else {
 		console.log(type);
-		scriptEl.value += prefix + '%' + str + '% ';
+		scriptEl.value += `${prefix} %${str}% `;
 		inputEl.value = '';
 
 		return;
@@ -110,10 +111,12 @@ function sendTime(str, type) {
 }
 function sendString(str, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (type.getAttribute('data-type') == 'return' && returnStatement == true) {
-		return alert('only one return statement allowed');
+		return showAlert('only one return statement allowed');
 	}
 	returnStatement = type.getAttribute('data-type') === 'return' ? true : false;
 	scriptEl.value += `${str}`;
@@ -122,13 +125,15 @@ function sendString(str, type) {
 
 function appendKeys(expr, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (inputEl.value == '') {
-		return alert('the input field is empty');
+		return showAlert('the input field is empty');
 	}
 	if (scriptEl.value != '') {
-		return alert('do not put that there, it goes at the beginning, please');
+		return showAlert('do not put that there, it goes at the beginning, please');
 	}
 	scriptEl.value += `${startingLine(scriptEl.value)}:R*?:${inputEl.value}::`;
 	inputEl.value = '';
@@ -138,10 +143,12 @@ function appendKeys(expr, type) {
 
 function sendInput(expr, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (inputEl.value == '') {
-		return alert('the input field is empty');
+		return showAlert('the input field is empty');
 	}
 
 	scriptEl.value += `${startingLine(scriptEl.value)}SendInput, ${
@@ -154,7 +161,9 @@ function sendInput(expr, type) {
 
 function send(str, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	let prefix = `${startingLine(scriptEl.value)}send, `;
 	if (lastPressed === 'key') {
@@ -174,11 +183,13 @@ function send(str, type) {
 
 function showInputBox(expr, type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	const [variable, prompt] = parseInput(inputEl.value);
 	if (!variable || !prompt) {
-		return alert(
+		return showAlert(
 			'the input is not formatted correctly.  you must specify the name of a variable followed by a comma and then the prompt you wish to display in the input box'
 		);
 	}
@@ -202,7 +213,9 @@ function startingLine(input) {
 
 function formatFullDate(type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (checkVarStatus(fullDateVar)) {
 		return;
@@ -218,7 +231,9 @@ function formatFullDate(type) {
 
 function formatFullMonth(type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (checkVarStatus(fullMonthVar)) {
 		return;
@@ -233,7 +248,9 @@ function formatFullMonth(type) {
 
 function formatCurrentTime(type) {
 	if (returnStatement === true) {
-		return alert('You have already returned, you cannot add any more stuff');
+		return showAlert(
+			'You have already returned, you cannot add any more stuff'
+		);
 	}
 	if (checkVarStatus(currentTimeVar)) {
 		return;
@@ -249,7 +266,7 @@ function formatCurrentTime(type) {
 
 function checkVarStatus(variable) {
 	if (variable) {
-		alert('this variable has already been declared');
+		showAlert('this variable has already been declared');
 		return true;
 	} else {
 		return false;
@@ -270,4 +287,12 @@ function clearAll() {
 	} else {
 		return;
 	}
+}
+
+function showAlert(str) {
+	toastEl.textContent = str;
+	toastEl.classList.add('show', 'animation');
+	setTimeout(() => {
+		toastEl.classList.remove('animation', 'show');
+	}, 3000);
 }
