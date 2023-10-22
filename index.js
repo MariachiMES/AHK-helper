@@ -94,7 +94,7 @@ function sendTime(str, type) {
 	if (!str || lastPressed != 'input') {
 		addJitter(type);
 		return showAlert(
-			'no date/time variables yet declared or you are trying to call a variable outside of a SendInput call.'
+			'Declare this variable, then SendInput before you press this'
 		);
 	}
 
@@ -239,7 +239,7 @@ function formatFullDate(type) {
 		scriptEl.value
 	)}FormatTime, CurrentDateTime, , MM/dd/yyyy`;
 	fullDateVar = 'CurrentDateTime';
-	lastPressed = 'key';
+	lastPressed = null;
 
 	return;
 }
@@ -258,7 +258,7 @@ function formatFullMonth(type) {
 		scriptEl.value
 	)}FormatTime, TodaysMonth, , MM`;
 	fullMonthVar = 'TodaysMonth';
-	lastPressed = 'key';
+	lastPressed = null;
 	return;
 }
 
@@ -276,7 +276,7 @@ function formatCurrentTime(type) {
 		scriptEl.value
 	)}FormatTime, CurrentTime, , hh:mm`;
 	currentTimeVar = 'CurrentTime';
-	lastPressed = 'key';
+	lastPressed = null;
 
 	return;
 }
@@ -297,9 +297,9 @@ function clearAll() {
 		currentDateTime = false;
 		todaysMonth = false;
 		returnStatement = false;
-		fullDateVar;
-		fullMonthVar;
-		currentTimeVar;
+		fullDateVar = null;
+		fullMonthVar = null;
+		currentTimeVar = null;
 		return;
 	} else {
 		return;
